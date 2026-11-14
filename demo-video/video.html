@@ -1,0 +1,93 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+:root{--bg:#101114;--bg2:#17191e;--card:#1d2027;--acc:#5276c7;--acc2:#8299c4;--ink:#e8e9ed;--mute:#969ba7;--line:#2b2e36;--ok:#65a88a;--warn:#d6a65c}
+*{box-sizing:border-box}html,body{margin:0;width:1280px;height:720px;background:var(--bg);color:var(--ink);font-family:'Inter','DejaVu Sans',sans-serif;overflow:hidden}
+.sc{position:absolute;inset:0;display:none;padding:64px 90px 150px}
+.cap{position:absolute;left:100px;right:100px;bottom:30px;text-align:center;font-size:25px;line-height:1.5;color:var(--ink)}
+.cap span{background:rgba(23,25,30,.92);padding:3px 12px;border-radius:6px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+h1{font-size:62px;line-height:1.08;letter-spacing:-.03em;margin:0;font-weight:600}h2{font-size:40px;letter-spacing:-.02em;margin:0;font-weight:600}
+.mono{font-family:'JetBrains Mono','DejaVu Sans Mono',monospace}
+.eyebrow{font:500 15px 'DejaVu Sans Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--acc2)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px}
+.chip{display:inline-block;font:500 15px 'DejaVu Sans Mono',monospace;padding:4px 12px;border-radius:5px;border:1px solid var(--line);color:var(--mute)}
+.ok{color:var(--ok);border-color:rgba(101,168,138,.5)}.warn{color:var(--warn);border-color:rgba(214,166,92,.5)}.acc{color:var(--acc2);border-color:rgba(82,118,199,.6)}
+.bar{height:26px;background:var(--line);border-radius:5px;overflow:hidden;position:relative}.bar i{position:absolute;left:0;top:0;bottom:0;border-radius:5px}
+svg .ring,svg .arrow,svg .tick{fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}svg .ring{stroke:var(--ink)}svg .arrow,svg .tick{stroke:var(--acc)}
+svg .node{fill:var(--bg);stroke:var(--acc2);stroke-width:2.2}svg .core{fill:var(--acc)}
+</style></head><body>
+<section class="sc" id="s1"><div class="eyebrow" id="s1e">A familiar story</div>
+<h1 id="s1h" style="margin-top:22px;max-width:980px">You changed one line in your agent’s prompt.</h1>
+<h1 id="s1h2" style="color:var(--acc2);margin-top:12px">Did it actually get better?</h1>
+<div class="card mono" style="margin-top:34px;padding:22px 28px;font-size:25px;width:940px;line-height:1.75"><div id="s1a" style="color:var(--mute);text-decoration:line-through;min-height:44px"></div><div id="s1b" style="color:var(--ok);min-height:44px"></div></div></section>
+
+<section class="sc" id="s2"><div class="eyebrow">How most teams check</div>
+<div style="display:flex;gap:40px;margin-top:26px"><div style="flex:1.2"><h2 id="s2t1">Check three examples. Ship.</h2>
+<div style="display:flex;gap:14px;margin-top:24px" id="s2cards"></div>
+<div class="card" id="s2bad" style="margin-top:24px;padding:18px 22px"><div class="eyebrow" style="color:var(--warn)">One week later · illustration, not a real incident</div><div class="mono" style="font-size:30px;margin-top:8px"><span id="s2n">0</span> refund requests answered wrongly</div></div></div>
+<div style="flex:1"><h2 id="s2t2">Or let the model grade itself.</h2><div class="card" id="s2self" style="margin-top:24px;padding:26px 28px"><div class="eyebrow">Self-assessment</div><div class="mono" style="font-size:78px;margin-top:6px">10 / 10</div><div style="color:var(--mute);margin-top:6px">Same model. Same blind spots.</div></div></div></div>
+<h1 id="s2end" style="font-size:46px;margin-top:34px;color:var(--acc2)">Neither is evidence.</h1></section>
+
+<section class="sc" id="s3"><div style="display:flex;align-items:center;gap:36px"><svg id="logo" viewBox="0 0 64 64" width="190" height="190"><path class="ring" pathLength="1" d="M32 6A26 26 0 1 0 54 19"/><path class="arrow" pathLength="1" d="M55 8L54 19L43 17"/><path class="tick" pathLength="1" d="M22 33L29 40L43 25"/><circle class="node" cx="32" cy="6" r="3.6"/><circle class="node" cx="9.5" cy="45" r="3.6"/><circle class="node" cx="54" cy="45" r="3.6"/><circle class="core" cx="32" cy="32" r="2.4"/></svg>
+<div><h1 id="s3h" style="font-size:84px">Eval<span style="color:var(--mute);font-weight:500">Loop</span></h1><div id="s3sub" style="font-size:32px;color:var(--acc2);margin-top:8px">A safety check for prompt changes.</div></div></div>
+<div style="display:flex;gap:18px;margin-top:56px;align-items:center" id="s3steps"></div></section>
+
+<section class="sc" id="s4" style="padding:34px 80px 150px"><div class="card" id="s4w" style="width:1120px;height:530px;overflow:hidden;position:relative;transform-origin:50% 0">
+<div style="height:34px;background:var(--bg2);border-bottom:1px solid var(--line);display:flex;align-items:center;padding:0 14px;gap:8px"><i style="width:10px;height:10px;border-radius:50%;background:var(--line)"></i><i style="width:10px;height:10px;border-radius:50%;background:var(--line)"></i><i style="width:10px;height:10px;border-radius:50%;background:var(--line)"></i><span class="mono" style="font-size:13px;color:var(--mute);margin-left:12px" id="s4url"></span><span class="chip warn" style="margin-left:auto;font-size:12px">sandbox data</span></div>
+<img id="s4img" style="width:1120px;height:630px;object-fit:cover;object-position:top;display:block"></div></section>
+
+<section class="sc" id="s5"><div class="eyebrow">The acceptance test</div><h2 style="margin-top:14px">A rule is kept only if all four hold</h2><div id="s5rows" style="margin-top:30px;display:grid;gap:14px;width:900px"></div>
+<div style="display:flex;gap:18px;margin-top:28px"><span class="chip ok" id="s5a" style="font-size:20px;padding:8px 18px">accepted</span><span class="chip warn" id="s5b" style="font-size:20px;padding:8px 18px">rolled_back</span></div></section>
+
+<section class="sc" id="s6"><div class="eyebrow">Independent audit</div><h2 style="margin-top:14px" id="s6t">The judge said one thing. Reppo said another.</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:34px;margin-top:32px">
+<div class="card" id="s6a" style="padding:26px 28px"><div class="eyebrow">SERV judge · scored by the loop</div><div class="mono" style="font-size:54px;margin:8px 0 18px"><span id="s6ja"></span> → <span id="s6jb"></span></div><div class="bar"><i id="s6bj0" style="background:var(--line);background:var(--mute)"></i></div><div class="bar" style="margin-top:10px"><i id="s6bj1" style="background:var(--acc)"></i></div><div class="mono" style="color:var(--mute);margin-top:10px;font-size:14px">baseline above · final below</div></div>
+<div class="card" id="s6b" style="padding:26px 28px"><div class="eyebrow">Reppo · independent audit</div><div class="mono" style="font-size:54px;margin:8px 0 18px"><span id="s6aa"></span> → <span id="s6ab"></span></div><div class="bar"><i id="s6ba0" style="background:var(--mute)"></i></div><div class="bar" style="margin-top:10px"><i id="s6ba1" style="background:var(--ok)"></i></div><div class="mono" style="color:var(--mute);margin-top:10px;font-size:14px">baseline above · final below</div></div></div>
+<div style="margin-top:26px"><span class="chip warn" id="s6v" style="font-size:20px;padding:9px 20px"></span><span class="mono" id="s6n" style="color:var(--mute);margin-left:16px;font-size:15px"></span></div></section>
+
+<section class="sc" id="s7"><div class="eyebrow">Proof and business</div><div style="display:grid;grid-template-columns:1.1fr 1fr;gap:34px;margin-top:18px">
+<div><h2 id="s7t1">Share the proof. Keep the prompts.</h2><div class="card" id="s7badge" style="margin-top:22px;padding:22px 24px"><div style="display:inline-flex;font:500 17px 'DejaVu Sans Mono',monospace;border-radius:5px;overflow:hidden"><span style="background:var(--card);border:1px solid var(--line);padding:6px 14px">EvalLoop</span><span id="s7bv" style="background:var(--warn);color:#101114;padding:6px 14px"></span></div><div class="mono" style="color:var(--mute);margin-top:14px;font-size:15px" id="s7link"></div></div>
+<div class="card mono" id="s7gate" style="margin-top:18px;padding:18px 24px;font-size:17px;line-height:1.7"><div style="color:var(--mute)">$ evalloop gate --min 0.7</div><div style="color:var(--warn)">GATE FAILED · exit 1 · pull request blocked</div></div></div>
+<div class="card" id="s7price" style="padding:28px 30px"><div class="eyebrow">Who pays</div><div style="font-size:26px;margin-top:10px;line-height:1.35">Teams shipping support and ops agents that must change safely.</div><div style="display:flex;gap:14px;margin-top:26px"><div class="card" style="flex:1;padding:16px 18px;background:var(--bg2)"><div class="mono" style="font-size:30px">Free</div><div style="color:var(--mute);font-size:15px;margin-top:4px">5 runs a month</div></div><div class="card" style="flex:1;padding:16px 18px;background:var(--bg2);border-color:var(--acc)"><div class="mono" style="font-size:30px">$29/mo</div><div style="color:var(--mute);font-size:15px;margin-top:4px">Pro · draft price</div></div></div></div></div></section>
+
+<section class="sc" id="s8" style="display:none;align-items:center;justify-content:center;flex-direction:column;text-align:center"><svg id="logo2" viewBox="0 0 64 64" width="150" height="150"><path class="ring" pathLength="1" d="M32 6A26 26 0 1 0 54 19"/><path class="arrow" pathLength="1" d="M55 8L54 19L43 17"/><path class="tick" pathLength="1" d="M22 33L29 40L43 25"/><circle class="node" cx="32" cy="6" r="3.6"/><circle class="node" cx="9.5" cy="45" r="3.6"/><circle class="node" cx="54" cy="45" r="3.6"/><circle class="core" cx="32" cy="32" r="2.4"/></svg>
+<h1 style="font-size:78px;margin-top:20px" id="s8h">Eval<span style="color:var(--mute);font-weight:500">Loop</span></h1><div class="mono" id="s8url" style="font-size:30px;color:var(--acc2);margin-top:16px"></div><div id="s8sub" style="font-size:22px;color:var(--mute);margin-top:18px">Built on SERV Reasoning · audited by Reppo · Reppo track</div></section>
+<div class="cap" id="cap"><span></span></div>
+<script>
+const D = window.__DATA__, $ = (i) => document.getElementById(i), clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x)), E = (x) => 1 - Math.pow(1 - clamp(x), 3);
+const ap = (el, lt, st, du = 0.5, dy = 16) => { const k = E((lt - st) / du); el.style.opacity = k; el.style.transform = `translateY(${(1 - k) * dy}px)`; };
+const typ = (el, s, lt, st, cps = 38) => { el.textContent = s.slice(0, Math.max(0, Math.floor((lt - st) * cps))); };
+const f2 = (x) => x.toFixed(2), R = D.real.run;
+const names = ['s1','s2','s3','s4','s5','s6','s7','s8'], dur = names.map((n) => D.timings[n]), starts = dur.reduce((a, d, i) => (a.push(i ? a[i-1] + dur[i-1] : 0), a), []);
+// build dynamic bits once
+for (let i = 0; i < 3; i++) { const c = document.createElement('div'); c.className = 'card'; c.style.cssText = 'padding:14px 18px;min-width:150px'; c.innerHTML = `<div class="eyebrow">Example ${i+1}</div><div class="mono ok" style="font-size:26px;margin-top:4px;border:0">✓ looks fine</div>`; c.id = 's2c' + i; $('s2cards').appendChild(c); }
+['Run', 'Judge', 'Revise', 'Audit'].forEach((t, i) => { const w = document.createElement('div'); w.id = 's3p' + i; w.style.cssText = 'display:flex;align-items:center;gap:18px'; w.innerHTML = `<div class="card" style="padding:16px 26px;font-size:26px;font-weight:600"><span class="mono" style="color:var(--acc2);font-size:16px;margin-right:10px">0${i+1}</span>${t}</div>` + (i < 3 ? '<span style="color:var(--mute);font-size:28px">→</span>' : ''); $('s3steps').appendChild(w); });
+['Average gain is at least 0.01', 'Bootstrap confidence is at least 80%', 'No single case drops by more than 0.30', 'Held-out cases do not get worse'].forEach((t, i) => { const r = document.createElement('div'); r.id = 's5r' + i; r.className = 'card'; r.style.cssText = 'padding:16px 24px;font-size:26px;display:flex;gap:18px;align-items:center'; r.innerHTML = `<span class="mono" style="color:var(--ok);font-size:28px" id="s5k${i}">✓</span><span>${t}</span>`; $('s5rows').appendChild(r); });
+const delta = R.auditFinal - R.auditBase, verdict = delta <= -0.05 ? 'contradicted' : delta >= 0.05 ? 'confirmed' : 'inconclusive';
+$('s4url').textContent = D.real.url; $('s7link').textContent = 'https://' + D.real.url + '/#/run/…';
+$('s8url').textContent = D.real.url;
+$('s6ja').textContent = f2(R.judgeBase); $('s6jb').textContent = f2(R.judgeFinal); $('s6aa').textContent = f2(R.auditBase); $('s6ab').textContent = f2(R.auditFinal);
+$('s6v').textContent = verdict === 'contradicted' ? 'audit disagrees: final scored lower' : verdict === 'confirmed' ? 'audit confirms the gain' : 'audit inconclusive';
+$('s6v').className = 'chip ' + (verdict === 'confirmed' ? 'ok' : verdict === 'contradicted' ? 'warn' : 'acc');
+$('s6n').textContent = `run “${R.name}” · ${R.cases} case${R.cases > 1 ? 's' : ''} · audit on ${R.auditCases || 1} · real numbers`;
+if (verdict === 'confirmed') { $('s6t').textContent = 'Two independent graders agree.'; $('s7bv').style.background = 'var(--ok)'; }
+$('s7bv').textContent = `${f2(R.judgeBase)} → ${f2(R.judgeFinal)} · ${verdict === 'contradicted' ? 'audit disagrees' : 'audited'}`;
+if (verdict !== 'contradicted') $('s7gate').children[1].textContent = 'GATE PASSED · exit 0 · safe to merge', $('s7gate').children[1].style.color = 'var(--ok)';
+const draws = [
+ (lt) => { ap($('s1e'), lt, 0.1); ap($('s1h'), lt, 0.3); ap($('s1h2'), lt, 1.6); typ($('s1a'), '- You are a support agent. Reply briefly.', lt, 2.6); typ($('s1b'), '+ You are a warm support agent. Reply briefly.', lt, 3.6); },
+ (lt, d) => { ap($('s2t1'), lt, 0.2); for (let i = 0; i < 3; i++) ap($('s2c' + i), lt, 1.0 + i * 0.35, 0.4); ap($('s2bad'), lt, 3.2); $('s2n').textContent = Math.floor(E((lt - 3.6) / 2.4) * 47); ap($('s2t2'), lt, 5.6); ap($('s2self'), lt, 6.2); ap($('s2end'), lt, 9.4); },
+ (lt) => { const k = E(lt / 1.4); ['ring'].forEach(() => 0); document.querySelectorAll('#logo .ring').forEach((e) => { e.style.strokeDasharray = 1; e.style.strokeDashoffset = 1 - k; }); document.querySelectorAll('#logo .arrow').forEach((e) => { e.style.strokeDasharray = 1; e.style.strokeDashoffset = 1 - E((lt - 1.2) / 0.4); }); document.querySelectorAll('#logo .tick').forEach((e) => { e.style.strokeDasharray = 1; e.style.strokeDashoffset = 1 - E((lt - 1.5) / 0.5); }); document.querySelectorAll('#logo .node,#logo .core').forEach((e) => { e.style.opacity = E((lt - 1.8) / 0.4); }); ap($('s3h'), lt, 0.5); ap($('s3sub'), lt, 1.6); for (let i = 0; i < 4; i++) ap($('s3p' + i), lt, 3.2 + i * 1.3, 0.5); },
+ async (lt, d) => { const idx = Math.max(1, Math.min(D.clip.n, Math.floor(lt * D.clip.fps) + 1)); const im = $('s4img'); im.src = `${D.clip.dir}/f${String(idx).padStart(4, '0')}.png`; await im.decode().catch(() => {}); $('s4w').style.transform = `scale(${1 + 0.04 * (lt / d)})`; },
+ (lt) => { ap($('s5rows').previousElementSibling, lt, 0.1); for (let i = 0; i < 4; i++) ap($('s5r' + i), lt, 1.2 + i * 1.5, 0.5); ap($('s5a'), lt, 7.6); ap($('s5b'), lt, 8.4); },
+ (lt) => { ap($('s6t'), lt, 0.2); ap($('s6a'), lt, 1.0); const k = E((lt - 1.6) / 1.4); $('s6bj0').style.width = (R.judgeBase * 100 * k) + '%'; $('s6bj1').style.width = (R.judgeFinal * 100 * k) + '%'; ap($('s6b'), lt, 3.4); const k2 = E((lt - 4.0) / 1.4); $('s6ba0').style.width = (R.auditBase * 100 * k2) + '%'; $('s6ba1').style.width = (R.auditFinal * 100 * k2) + '%'; ap($('s6v'), lt, 6.8); ap($('s6n'), lt, 7.2); },
+ (lt) => { ap($('s7t1'), lt, 0.1); ap($('s7badge'), lt, 0.7); ap($('s7gate'), lt, 3.0); ap($('s7price'), lt, 5.2); },
+ (lt) => { const k = E(lt / 1.2); document.querySelectorAll('#logo2 .ring').forEach((e) => { e.style.strokeDasharray = 1; e.style.strokeDashoffset = 1 - k; }); document.querySelectorAll('#logo2 .arrow').forEach((e) => { e.style.strokeDasharray = 1; e.style.strokeDashoffset = 1 - E((lt - 1) / 0.4); }); document.querySelectorAll('#logo2 .tick').forEach((e) => { e.style.strokeDasharray = 1; e.style.strokeDashoffset = 1 - E((lt - 1.3) / 0.4); }); document.querySelectorAll('#logo2 .node,#logo2 .core').forEach((e) => { e.style.opacity = E((lt - 1.5) / 0.3); }); ap($('s8h'), lt, 0.6); ap($('s8url'), lt, 1.4); ap($('s8sub'), lt, 2.0); },
+];
+window.__total = dur.reduce((a, b) => a + b, 0);
+window.__frame = async (t) => {
+  let i = starts.length - 1; while (i > 0 && t < starts[i]) i--;
+  const lt = t - starts[i], d = dur[i];
+  names.forEach((n, j) => { const el = $(n); el.style.display = j === i ? (n === 's8' ? 'flex' : 'block') : 'none'; });
+  await draws[i](lt, d);
+  const cap = D.script[names[i]], c = $('cap'); c.firstChild.textContent = cap;
+  c.style.opacity = E(lt / 0.4) * (1 - E((lt - (d - 0.4)) / 0.4)); c.style.display = (D.captions === false) ? 'none' : 'block';
+};
+</script></body></html>

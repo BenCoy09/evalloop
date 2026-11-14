@@ -1,0 +1,10 @@
+{
+  "name": "evalloop",
+  "version": "1.0.0",
+  "description": "A safety check for AI agent prompt changes: improve against a fixed test set, keep only what statistically holds, audit independently, log everything in a hash-chained ledger.",
+  "type": "module",
+  "license": "MIT",
+  "engines": { "node": ">=20" },
+  "scripts": { "start": "node evalloop.mjs", "demo": "node evalloop.mjs --demo", "test": "node evalloop.mjs --selftest", "check": "node evalloop.mjs --check" },
+  "keywords": ["ai-agents", "evaluation", "prompt-engineering", "serv-reasoning", "reppo", "ci"]
+}

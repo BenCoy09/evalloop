@@ -1,0 +1,5 @@
+{
+  "url": "evalloop-1458.fly.dev",
+  "run": { "name": "support-agent-8case", "cases": 8, "auditCases": 1, "judgeBase": 0.17, "judgeFinal": 0.83, "auditBase": 0.77, "auditFinal": 0.95 },
+  "note": "Real numbers from the live run support-agent-8case: loop (SERV judge) train 0.17 to 0.83 at v2; Reppo audit of 1 case 0.77 to 0.95."
+}
