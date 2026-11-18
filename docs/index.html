@@ -1,0 +1,49 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EvalLoop: a safety check for AI agent prompt changes</title>
+<meta name="description" content="EvalLoop improves an AI agent's instructions on a fixed test set, keeps a rule only if it holds on held-out cases, and audits the result independently. Built on SERV Reasoning, audited by Reppo.">
+<style>
+:root{--bg:#101114;--card:#1d2027;--bg2:#17191e;--acc:#5276c7;--acc2:#8299c4;--ink:#e8e9ed;--mute:#969ba7;--line:#2b2e36;--ok:#65a88a;--warn:#d6a65c;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+.w{max-width:980px;margin:0 auto;padding:0 22px}header{border-bottom:1px solid var(--line)}header .w{display:flex;justify-content:space-between;align-items:center;height:60px}
+a{color:var(--acc2)}h1{font-size:clamp(34px,6vw,56px);line-height:1.08;letter-spacing:-.03em;margin:14px 0}h2{font-size:28px;letter-spacing:-.02em;margin:0 0 12px}
+section{padding:56px 0;border-top:1px solid var(--line)}.eyebrow{font:500 13px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--acc2)}
+.lead{color:var(--mute);max-width:64ch}.banner{border:1px solid rgba(214,166,92,.5);color:var(--warn);background:rgba(214,166,92,.06);border-radius:8px;padding:12px 16px;font-size:14px;margin-top:22px}
+.btn{display:inline-block;padding:10px 18px;border-radius:6px;border:1px solid var(--line);background:var(--card);color:var(--ink);text-decoration:none;font-size:14px;margin:6px 8px 0 0}.btn.p{background:var(--acc);border-color:var(--acc)}
+table{width:100%;border-collapse:collapse;font:14px var(--mono);background:var(--card);border:1px solid var(--line);border-radius:8px;overflow:hidden}th,td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--line)}th{color:var(--mute);font-weight:500;font-size:12px;text-transform:uppercase}
+.ok{color:var(--ok)}.warn{color:var(--warn)}.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}.card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:18px 20px}.card b{display:block;margin:6px 0}.card p{margin:0;color:var(--mute);font-size:14px}
+pre{background:var(--bg2);border:1px solid var(--line);border-radius:8px;padding:14px 16px;overflow-x:auto;font:13px/1.6 var(--mono)}img{max-width:100%;border:1px solid var(--line);border-radius:8px;display:block}figcaption{color:var(--mute);font-size:13px;margin-top:8px}
+footer{border-top:1px solid var(--line);padding:28px 0;color:var(--mute);font:12px var(--mono)}
+</style></head><body>
+<header><div class="w"><b>EvalLoop</b><a href="https://github.com/Bencoy09/evalloop">GitHub</a></div></header>
+<main><section class="w" style="border:0"><div class="eyebrow">SERV Hackathon 02 · Reppo track</div>
+<h1>A safety check for AI agent prompt changes</h1>
+<p class="lead">EvalLoop improves an agent's instructions against a fixed test set, keeps a rule only if it statistically holds on cases the loop never trained on, then has Reppo audit the before and after independently. Every step is written to a hash-chained ledger anyone can verify.</p>
+<p><a class="btn" href="https://github.com/Bencoy09/evalloop">Read the code</a></p>
+<div class="banner"><b>Status:</b> the always-on demo server is temporarily offline because the hosting account is under review. Everything on this page is real output from the live run, and the app runs on any machine in one command (below).</div></section>
+
+<section class="w"><div class="eyebrow">A real run</div><h2>support-agent-8case</h2>
+<p class="lead">8 test cases (6 training, 2 held out), 3 iterations. The agent started as just “You are a support agent.”</p>
+<table><thead><tr><th>Version</th><th>Train</th><th>Held-out</th><th>Decision</th><th>P(better)</th></tr></thead><tbody>
+<tr><td>v0 baseline</td><td>0.17</td><td>0.25</td><td>baseline</td><td>–</td></tr>
+<tr><td>v1</td><td>0.33</td><td>0.38</td><td class="ok">accepted</td><td>1.00</td></tr>
+<tr><td>v2</td><td>0.83</td><td>0.63</td><td class="ok">accepted</td><td>1.00</td></tr>
+<tr><td>v3</td><td>0.75</td><td>1.00</td><td class="warn">rolled back</td><td>0.19</td></tr></tbody></table>
+<p class="lead" style="margin-top:14px"><b>Independent audit (Reppo), one case: 0.77 → 0.95.</b> The audit confirmed the direction. This is a demonstration, not a benchmark: 8 cases and one audited case.</p>
+<figure style="margin:22px 0 0"><img src="screenshots/real-run.png" alt="Screenshot of the live EvalLoop run page for support-agent-8case"><figcaption>Screenshot of the live run page (phone view): scores, version table, Reppo audit and the ledger tail.</figcaption></figure></section>
+
+<section class="w"><div class="eyebrow">Why the audit matters</div><h2>The judge was wrong once, and EvalLoop said so</h2>
+<p class="lead">In an earlier one-case run, the SERV judge scored a change 0.25 → 0.75 while Reppo scored the same change 0.83 → 0.68. EvalLoop flagged “audit disagrees” instead of showing a green result. One grader, grading its own side's work, would have missed it.</p></section>
+
+<section class="w"><div class="eyebrow">How it works</div><h2>Four steps, and a rollback</h2><div class="grid">
+<div class="card"><span class="eyebrow">01</span><b>Run</b><p>Your agent answers every test case.</p></div>
+<div class="card"><span class="eyebrow">02</span><b>Judge</b><p>A SERV Reasoning judge scores each answer against your rubric.</p></div>
+<div class="card"><span class="eyebrow">03</span><b>Revise</b><p>SERV proposes one rule. It is kept only if the gain holds on held-out cases, otherwise it rolls back.</p></div>
+<div class="card"><span class="eyebrow">04</span><b>Audit</b><p>Reppo grades baseline and final independently. Disagreement is flagged.</p></div></div></section>
+
+<section class="w"><div class="eyebrow">Run it yourself</div><h2>One file, no install</h2>
+<pre>git clone https://github.com/Bencoy09/evalloop
+cd evalloop
+node evalloop.mjs --selftest   # offline checks
+node evalloop.mjs --demo       # sandbox server on http://localhost:8787</pre>
+<p class="lead">Needs Node 20 or newer. The README covers live mode with SERV and Reppo keys, the CI gate, and deployment.</p></section></main>
+<footer><div class="w">EvalLoop · built on SERV Reasoning · audited by Reppo · MIT licence</div></footer></body></html>

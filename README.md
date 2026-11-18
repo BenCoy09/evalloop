@@ -4,7 +4,9 @@
 
 Built for **SERV Hackathon 02 · Reppo track**. Zero dependencies: one Node file.
 
-**[Try it, no signup](https://evalloop-1458.fly.dev)** · **[See a real audited run](https://evalloop-1458.fly.dev/#/run/0cf65744-ea99-4cee-aadf-f69766de4248)**
+**[Project page](https://Bencoy09.github.io/evalloop/)**
+
+> **Status:** the always-on demo server is temporarily offline (hosting account under review). The project page above shows the real audited run, and the app runs locally in one command: `node evalloop.mjs --demo`.
 
 ![Run page](docs/screenshots/run.png)
 *Screenshots in this repo use the built-in sandbox providers. The real run is linked above.*
