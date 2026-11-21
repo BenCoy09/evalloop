@@ -4,7 +4,7 @@
 
 Built for **SERV Hackathon 02 · Reppo track**. Zero dependencies: one Node file.
 
-**[Project page](https://evalloop.onrender.com/)**
+**[Project page]([https://evalloop.onrender.com](https://evalloop-p83j.onrender.com/)/)**
 
 > **Status:** the always-on demo server is temporarily offline (hosting account under review). The project page above shows the real audited run, and the app runs locally in one command: `node evalloop.mjs --demo`.
 
